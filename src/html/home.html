@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- *google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!-- *bootstrap css cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <title>Home</title>
+
+    <!-- *custom css -->
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <style>
+        * {
+            font-family: 'Roboto Mono', monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- *Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BUGZ-IT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">APIs</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">Github</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                    href="https://github.com/NikhilRJ2017/Issue-Tracker-Application-Backend"
+                                    target="_blank">Backend Code</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Frontend Code</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div>
+                    <button class="btn btn-info me-3 mb-sm-3 mb-3 mb-md-0" data-bs-toggle="modal"
+                        data-bs-target="#createProjectModal"><strong>+</strong> Create Project</button>
+                </div>
+
+                <div class="dropdown" style="margin-right: 8rem;">
+                    <button class="btn btn-secondary dropdown-toggle current-user-name" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Profile
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item update_user_details" href="#" data-bs-toggle="modal"
+                                data-bs-target="#UpdateUserDetailsModal">Update Details</a></li>
+                        <li><a class="dropdown-item update_user_password" href="#" data-bs-toggle="modal"
+                                data-bs-target="#UpdateUserPasswordModal">Update Password</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <div class=" text-center">
+                            <button type="button" class="btn btn-danger logout">Logout</button>
+                        </div>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+    <main class="container">
+
+        <section class="py-5 text-center container">
+            <!-- project search bar -->
+            <form class="d-flex" role="search">
+                <input class="form-control me-2 searchbar-project" type="search"
+                    placeholder="Search for project by project name" aria-label="Search">
+            </form>
+
+            <!-- roject close checkbox -->
+            <div class="mt-1">
+                <input class="form-check-input closed-project-checkbox" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Closed Projects
+                </label>
+            </div>
+
+
+        </section>
+
+        <h4 class="text-primary">Total Projects: <strong class="project-count">0</strong></h4>
+        <h6 class="text project-fetch-status"></h6>
+        <!-- projects cards -->
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 project-container">
+                    <!-- Dyanmically cards inserted -->
+                </div>
+
+            </div>
+        </div>
+
+        <!-- create project modal -->
+        <div class="modal fade" id="createProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="createProjectModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="createProjectModalLabel">Create Project</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="create-project-form">
+                            <!-- Name of the project -->
+                            <div class="mb-3 text-start">
+                                <label for="projectName" class="form-label">Name of the Project</label>
+                                <input type="text" class="form-control create-project-name" id="projectName">
+                            </div>
+                            <!-- Description of the project -->
+                            <div class="mb-3 text-start">
+                                <label for="projectDescription" class="form-label">Description</label>
+                                <textarea class="form-control create-project-description" id="projectDescription"
+                                    rows="4"></textarea>
+                            </div>
+
+                            <!-- create button -->
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary create-project-btn">Create</button>
+                            </div>
+                            <h6 class="create-project-error-message text-danger my-1"></h6>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Change User details modal -->
+        <div class="modal fade" id="UpdateUserDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="UpdateUserDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="UpdateUserDetailsModalLabel">Update Details</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="update-user-details-form">
+                            <!-- email -->
+                            <div class="mb-3 text-start">
+                                <label for="updateUserInputEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control update-user-details-form-email"
+                                    id="updateUserInputEmail">
+                            </div>
+                            <!-- name -->
+                            <div class="mb-3 text-start">
+                                <label for="updateUserInputName" class="form-label">Name</label>
+                                <input type="text" class="form-control update-user-details-form-name"
+                                    id="updateUserInputName">
+                            </div>
+                            <!-- update btn -->
+                            <div class="text-center"><button type="submit" class="btn btn-primary">Update</button></div>
+                            <h6 class="update-user-details-form-error-message text-danger my-1"></h6>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Change User password modal -->
+        <div class="modal fade" id="UpdateUserPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="UpdateUserPasswordModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="UpdateUserPasswordModalLabel">Update Password</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="update-user-password-form">
+                            <!-- old password -->
+                            <div class="mb-3 text-start">
+                                <label for="updateUserPasswordInputOldPassword" class="form-label">Old Password</label>
+                                <input type="password" class="form-control update-user-password-form-old-password"
+                                    id="updateUserPasswordInputOldPassword">
+                            </div>
+                            <!-- new password -->
+                            <div class="mb-3 text-start">
+                                <label for="updateUserPasswordInputNewPassword" class="form-label">New Password</label>
+                                <input type="password" class="form-control update-user-password-form-new-password"
+                                    id="updateUserPasswordInputNewPassword">
+                            </div>
+                            <div class="text-center"><button type="submit" class="btn btn-primary">Update</button></div>
+                            <h6 class="update-user-password-form-error-message text-danger my-1"></h6>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+
+
+
+    <!-- Javascrits -->
+
+    <!-- *bootstrap js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+
+    <!-- *axios cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- *Custom JS -->
+    <script type="module" src="../js/home.js"></script>
+    <script type="module" src="../js/auth/logout.js"></script>
+    <script type="module" src="../js/project/fetch_all_projects.js"></script>
+    <script type="module" src="../js/project/create_project.js"></script>
+    <script type="module" src="../js/user/user.js"></script>
+
+</body>
+
+</html>
