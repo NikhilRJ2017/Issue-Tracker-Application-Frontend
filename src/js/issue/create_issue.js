@@ -2,6 +2,7 @@
 import get from "../utils/getElement.js";
 import { createIssueUrl } from "../utils/urls.js";
 import fetchAllIssues from "./fetch_all_issues.js";
+import showProjectDetails from "./show_project_details.js";
 import axios from "../utils/axios.js";
 
 // getting all essentials
@@ -31,6 +32,7 @@ const createIssue = async (projectId) => {
 
         // fetch all issues to make newly added issue visible
         fetchAllIssues(projectId, '', [].join(''));
+        showProjectDetails(projectId);
 
         //clearing create issue form's input field
         clearAllFields();
